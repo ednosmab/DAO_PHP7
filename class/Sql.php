@@ -3,8 +3,9 @@
         private $conn;//Variável para conexão do banco
 
         //Construtora para conectar ao banco
-       public function __construct($tipoBanco, $nomeBanco, $login, $pass){//Caso haja necessidade de utilizar outros bancos,
-        //em index.php foi configurado no instanciamento de Sql o tipo do banco que é mysql, 
+        //public function __construct(){
+       public function __construct($tipoBanco, $nomeBanco, $login, $pass){//Caso haja necessidade de 
+        //utilizar outros bancos, em index.php foi configurado no instanciamento de Sql o tipo do banco que é mysql, 
         //nome do banco, usuário e senha
 
             //$this->conn = new PDO("mysql:host=localhost;dbname=dbphp7", "root", "");
@@ -14,15 +15,15 @@
         }
         
         //Função para associar os parametros com o bindParams
-        public function setParams($stament, $parameters = array()){
+        public function setParams($statment, $parameters = array()){
             foreach($parameters as $key => $value){
-                $this->setParam($key, $value);
+                $this->setParam($statment, $key, $value);
             }
         }
 
         //Função para associar um parametro com o bindParam
-        public function setParam($stament, $key, $value){
-            $stament->bindParam($key, $value);
+        public function setParam($statment, $key, $value){
+            $statment->bindParam($key, $value);
         }
 
         //RawQuery: Query bruta que será trabalhada no index
