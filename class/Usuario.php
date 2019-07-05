@@ -37,8 +37,8 @@
 
         
         
-        public function loadById($id, $tipoBanco, $nomeBanco, $login, $pass){
-            $sql = new Sql($tipoBanco, $nomeBanco, $login, $pass);
+        public function loadById($id){
+            $sql = new Sql();
             $results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
                 ":ID"=>$id
             ));
@@ -50,6 +50,38 @@
                 $this->setDtcadastro(new DateTime($row['dtcadastro']));
             }
         }
+
+        //Lista todos os usuários do banco
+        public static function getList(){
+            $sql = new Sql();
+            return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+        }
+
+        //Lita usuarios que tiverem algo em comum a pesquisa
+        public static function getSearch($login){
+            $sql = new Sql();
+            return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY idusuario", array(
+                ":SEARCH"=>"%".$login."%"
+            ));
+        }
+
+        public function login($login, $pass){
+            $sql = new Sql();
+            $results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASS", array(
+                ":LOGIN"=>$login, ':PASS'=>$pass
+            ));
+            if(count($results) > 0){
+                $row = $results[0];
+                $this->setIdusuario($row['idusuario']);
+                $this->setDeslogin($row['deslogin']);
+                $this->setDessenha($row['dessenha']);
+                $this->setDtcadastro(new DateTime($row['dtcadastro']));
+            }else{
+                throw new Exception("LOgin ou Senha inválidos");
+            }
+        
+        }
+
         public function __toString(){
             return json_encode(array(
                 "idusuario"=>$this->getIdusuario(),

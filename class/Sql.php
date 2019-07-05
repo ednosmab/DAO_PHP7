@@ -3,15 +3,8 @@
         private $conn;//Variável para conexão do banco
 
         //Construtora para conectar ao banco
-        //public function __construct(){
-       public function __construct($tipoBanco, $nomeBanco, $login, $pass){//Caso haja necessidade de 
-        //utilizar outros bancos, em index.php foi configurado no instanciamento de Sql o tipo do banco que é mysql, 
-        //nome do banco, usuário e senha
-
-            //$this->conn = new PDO("mysql:host=localhost;dbname=dbphp7", "root", "");
-            $this->conn = new PDO($tipoBanco.";".$nomeBanco, $login, $pass);
-            
-            
+        public function __construct(){
+            $this->conn = new PDO("mysql:host=localhost;dbname=dbphp7", "root", "");
         }
         
         //Função para associar os parametros com o bindParams
