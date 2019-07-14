@@ -39,5 +39,5 @@
     $usuario = new Usuario();
     $usuario->loadById(10);
     $usuario->delete();
-    echo $usuario;//Somente a Data que não foi zerada
+    echo $usuario;
 ?>
