@@ -20,7 +20,24 @@
     echo $usuario;
      */
 
+    /* 
+    //Inserindo mais um usuario
     $aluno = new Usuario('aluno', '@lun0');
     $aluno->insert();
     echo $aluno;
+    */
+
+    /* 
+    //Alterando nome do usuario e senha
+    $usuario = new Usuario();
+    $usuario->loadById(10);
+    $usuario->update('Andre', 'cafe');
+    echo $usuario;
+    */
+
+    //Deletando usuario
+    $usuario = new Usuario();
+    $usuario->loadById(10);
+    $usuario->delete();
+    echo $usuario;//Somente a Data que não foi zerada
 ?>
